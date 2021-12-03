@@ -27,12 +27,17 @@ export const fetchPokemon = async () => {
             );
             return exactPokemon;
           }
-         
-           
         })
       );
       return pokemonList;
     };
+
+    export const fetchSearchPokemon = (pokemonName) => {
+        return fetch( `https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${pokemonName}`)
+        .then((data) => data.json())
+    };
+
+
     
 
 

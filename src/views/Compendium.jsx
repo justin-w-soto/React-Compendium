@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { FilterForm } from '../components/Forms/FilterForm';
-import { SearchForm } from '../components/Forms/SearchForm';
 import { PokemonList } from '../components/PokemonList/PokemonList';
-import { fetchPokemon } from '../services/pokemon';
+import { Controls } from '../components/Controls/Controls';
+import { fetchPokemon, fetchSearchPokemon } from '../services/pokemon';
 
 import pokeball from '../assets/pokeball.png';
 import '../App.css';
@@ -25,13 +24,34 @@ export const Compendium = () => {
     getPokemon();
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    fetchSearchPokemon(searchName)
+      .then((searchedPokemons) => {
+        setPokemons(searchedPokemons)
+     })
+      .catch((error) => {})
+      .finally(() => {
+        setLoading(false);
+        setSearchName('');
+        setSelectedType('');
+      });
+  };
+
     return (
         <div>
             <img className= 'pokeball' src={pokeball} alt='pokeball' />
             <h1>Hello From the PokeDex</h1>
-            <SearchForm />
-            <FilterForm />
             <PokemonList />
+            <Controls
+                name={searchName}
+                handleSubmit={handleSubmit}
+                handleNameChange={setSearchName}
+                types={types}
+                filterChange={setSelectedType}
+                selectedType={selectedType}
+            />
         </div>
     )
 }
