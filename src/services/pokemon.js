@@ -20,8 +20,13 @@ export const fetchPokemon = async () => {
           );
     
           const pokemonData = await fetchedPokemon.json();
-    
-          
+            
+          if (pokemonData.count > 1) {
+            const exactPokemon = pokemonData.results.find(
+              (result) => result.pokemon === fav
+            );
+            return exactPokemon;
+          }
          
            
         })
