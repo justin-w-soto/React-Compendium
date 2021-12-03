@@ -5,7 +5,10 @@ import { Compendium } from './views/Compendium';
 function App() {
 
   return (
+    <>
+   
     <Compendium />
+    </>
   );
 }
 
