@@ -39,5 +39,10 @@ export const fetchPokemon = async () => {
 
 
     
+    export const fetchTypes = async () => {
+        const res = await fetch(`https://pokedex-alchemy.herokuapp.com/api/pokedex/types`);
+      
+        const pokemonTypes = await res.json();
 
-
+    };
+    

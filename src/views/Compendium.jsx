@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { PokemonList } from '../components/PokemonList/PokemonList';
 import { Controls } from '../components/Controls/Controls';
-import { fetchPokemon, fetchSearchPokemon } from '../services/pokemon';
+import { fetchPokemon, fetchSearchPokemon, fetchTypes } from '../services/pokemon';
 
 import pokeball from '../assets/pokeball.png';
 import '../App.css';
 
 export const Compendium = () => {
     const [loading, setLoading] = useState(true);
-  const [pokemons, setPokemons] = useState([]);
-  const [searchName, setSearchName] = useState('');
-  const [types, setTypes] = useState([]);
-  const [selectedType, setSelectedType] = useState('all');
+    const [pokemons, setPokemons] = useState([]);
+    const [searchName, setSearchName] = useState('');
+    const [types, setTypes] = useState([]);
+    const [selectedType, setSelectedType] = useState('all');
 
   
   useEffect(() => {
@@ -38,6 +38,16 @@ export const Compendium = () => {
         setSelectedType('');
       });
   };
+
+  useEffect(() => {
+    async function getTypes() {
+     const pokemonTypes = await fetchTypes();
+     setTypes(pokemonTypes);
+   }
+
+   getTypes();
+ }, []);
+
 
     return (
         <div>
