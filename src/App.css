@@ -5,3 +5,8 @@ body {
   flex-direction: column;
   text-align: center;
 }
+
+.pokeball {
+  width: 10rem;
+  height: 10rem;
+}
